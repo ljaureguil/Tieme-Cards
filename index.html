@@ -37,7 +37,7 @@ position:relative;
 top:2%;
 left:0%;
 background:blue;
-    color:white;
+color:white;
 }
 #daddw{
 display:none;
@@ -54,8 +54,6 @@ overflow:auto;
 </style>
 
 
-<textarea id="ori" style="width:20%;height:10%;display:none;"></textarea><br><br>
-
 
 <div id="daddw">
 <textarea id="taddw" style='height:85%; width:80%;' placeholder="Past it Here..."></textarea><br>
@@ -64,8 +62,6 @@ overflow:auto;
 </div>
 
 
-
-<button onclick="process26()" style="display:none;">process</button><br><br>
 <select id="sweeks" oninput="isearch.value=this.value;isearch.oninput()">
 <option>Select a week</option>
 </select>
@@ -128,11 +124,6 @@ GetJ(linkd, function(o) {
 }else alert("Wrong Password, try again");
 
 
-
-
-process2 = function() {
-    setup(ori.value);
-};
 var obj = {}
 
 function setup(s) {
