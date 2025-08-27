@@ -118,7 +118,7 @@ GetJ(link, function(r) {
 })
 GetJ(linkd, function(o) {
     obt = o;
- //   setUpWeeks();
+
     setUpEvents();
 });
 }else alert("Wrong Password, try again");
@@ -174,7 +174,7 @@ function setup(s) {
 
                 // arr.push(w);
                 artemp.push(art);
-                crEv2(art); //w
+            //    crEv2(art); //w
             }
 
         }
@@ -185,7 +185,40 @@ function setup(s) {
 
 }
 
+
 search = function(v) {
+    v = v.toUpperCase();
+    var total = 0;
+    var els = obt.events;//document.getElementsByClassName("ce");
+//  alert(els[10][7])
+    ;
+    for (var i = 0; i < els.length; i++) { 
+            var e = els[i][7];
+      //  var st = JSON.stringify(els[i].arevent); 
+   //   var st=els[i]
+   var p1=els.slice(0,6).toString();
+   st=els[i].toString()//p1;//JSON.stringify(p1)
+   
+        st = st.toUpperCase();
+   //    if(!confirm(st))return;;
+     
+
+        if (st.indexOf(v) > -1) {
+            e.style.display = "inline-block";
+            total += els[i][4] * 1;
+
+        } else e.style.display = "none";
+
+    }
+    th.innerHTML = total+",   Total of events: "+selCont().length;
+}
+
+
+
+
+
+
+search2 = function(v) {
     v = v.toUpperCase();
     var total = 0;
     var els = document.getElementsByClassName("ce");
@@ -344,31 +377,46 @@ if(!confirm("All looks good... do you want to proced to addit?")) return;
 crEv = function(e) {
 
     var ev = document.createElement("textarea");
+  
     ev.setAttribute("readOnly", true);
+    e.push(ev)
     ev.arevent = e;
+   
     var st = "Job No.: " + e[0] + "\nDesc: " + e[1] + "\nOUT: " + e[2] + "\nIN: " + e[3] + "\nHours: " + e[4] + "\nDate: " + e[5] + "\nIn Week: " + e[6];
 
     ev.value = st;
     ev.setAttribute("class", "ce");
     ev.onclick = function() {
         alert(this.arevent);
+       
 
     }
+  
     cont.appendChild(ev);
 }
 
 setUpWeeks = function() {
     var a = [];
     sweeks.innerHTML = "<option>Select a Week</option>"
-
+    var r=Math.random()*140,g=Math.random()*140,b=Math.random()*140,rgb="rgb("+r+","+g+","+b+")"
     var evt = "",ss=[];
+   
     for (var i = 0; i < obt.events.length; i++) {
+
         if (evt != obt.events[i][6]) {
-     //       ss += "<option>" + obt.events[i][6] + "</option>";
+     
             ss.push( "<option>" + obt.events[i][6] + "</option>");
 
-            evt = obt.events[i][6]
+            evt = obt.events[i][6];
+     r=Math.random()*140;g=Math.random()*140;b=Math.random()*140;rgb="rgb("+r+","+g+","+b+")";
+     var pe=document.createElement("p");
+     pe.innerHTML=".................<br><br>"+obt.events[i][6];
+     
+     cont.insertBefore(pe,obt.events[i][7])
+
+           
         }
+                obt.events[i][7].style.background=rgb;
 
     }
 ss.sort()
@@ -376,18 +424,31 @@ ss.sort()
 sweeks.innerHTML=ss;
 
 }
-
+ 
 function setUpEvents() {
-
+var w;
     cont.replaceChildren()
     for (var i = 0; i < obt.events.length; i++) {
-        crEv(obt.events[i]);
+var e=obt.events[i];
+
+        crEv(e);
 
     }
   setUpWeeks();
+/*  var ew=cont.children;
+  for(var i=0;i<ew.length-1;i++){
+    var e=ew[i];
+    if(e[6].indexOf(w)){
 
+    }
+    else w=e[6];
+  }
+
+
+*/
 
 }
+
 
 function selCont(){
 var ch=document.getElementsByClassName("ce");
